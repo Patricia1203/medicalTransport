@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Simulador Financeiro</title>
+	</head>
+	<body>
+		<h1>Simulador de perda de medicamentos e receita</h1>
+		<h3>Quantas viagens são feitas por semana?</h3>
+		<input type="text" id="iptQtdViagens" />
+		<h3>Valor do medicamento (un.):</h3>
+		<input type="text" id="iptValor" />
+		<h3>Quantidade de medicamentos transportadas por viagem:</h3>
+		<input type="text" id="iptQtdMedicamentos" />
+		<h3>Quantos medicamentos são perdidas por viagem? (em média):</h3>
+		<input type="text" id="iptQtdMedicamentosPerdidas" />
+		<br /><br />
+		<button id="btnSimular" onclick="simular()"><b>Simular</b></button>
+		<br /><br />
+		<div id="output"></div>
+	</body>
+</html>
+<script>
+	var valorMedicamento = 0;
+	var medicamentosPorViagem = 0;
+	var medicamentosPerdidos = 0;
+	var quantidadeViagens = 0;
+	var totalPerdidoSemana = 0;
+	var totalPerdidoMes = 0;
+	var totalPerdidoAno = 0;
+	var totalPerdidoViagem = 0;
+
+	function simular() {
+		valorMedicamento = Number(iptValor.value);
+		medicamentosPorViagem = Number(iptQtdMedicamentos.value);
+		medicamentosPerdidos = Number(iptQtdMedicamentosPerdidas.value);
+		quantidadeViagens = Number(iptQtdViagens.value);
+
+		totalPerdidoSemana = medicamentosPerdidos * quantidadeViagens * valorMedicamento;
+		totalPerdidoViagem = totalPerdidoSemana / quantidadeViagens;
+		totalPerdidoMes = totalPerdidoSemana * 4;
+		totalPerdidoAno = totalPerdidoMes * 12;
+
+		output.innerHTML = `<b>Simulação concluída!</b><br><br>
+		Com os dados fornecidos, concluimos que você:<br><br>
+		- Por <b>viagem</b> perde, em média, ${
+			(medicamentosPerdidos * quantidadeViagens) / quantidadeViagens
+		} medicamentos, gerando <b>R$${totalPerdidoViagem}</b> de prejuízo.<br><br>
+		- Por <b>semana</b> perde, em média, ${
+			medicamentosPerdidos * quantidadeViagens
+		} medicamentos, gerando <b>R$${totalPerdidoSemana}</b> de prejuízo.<br><br>
+		- Por <b>mês</b> perde, em média, ${
+			medicamentosPerdidos * quantidadeViagens * 4
+		} medicamentos, gerando<b> R$${totalPerdidoMes}</b> de prejuízo.<br><br>
+		Isso pode gerar um prejuízo de até <b>R$${totalPerdidoAno} </b>por ano.<br><br>
+		Venha conosco mudar isso! Com nossa solução, você pode perder menos dinheiro e salvar mais vidas.
+		`;
+	}
+</script>

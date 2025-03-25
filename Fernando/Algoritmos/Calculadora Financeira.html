@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira </title>
+</head>
+<body>
+    <h2>Calculadora Financeira MTC</h2>
+    Qual o tipo de medicamento: <input type="text" id="ipt_medicamento"><br><br>
+    Qual o status do medicamento: <input type="text" id="ipt_status"><br><br>
+    Quantos sensores ativos: <input type="text" id="ipt_sensor"><br><br><br>
+    <button onclick="btn_calculo()">Calcular</button>
+    <div id="resultado_div"></div>
+</body>
+</html>
+<script>
+    var medicamento = 0;
+    var status = 0;
+    var sensores = 0;
+    var custobase = 100;
+    var custotemperatura = 0;
+    function btn_calculo() {
+        medicamento = ipt_medicamento.value
+        status = ipt_status.value
+        sensores = ipt_sensor.value
+        custobase = 100;
+        custotemperatura = 0;
+        custosensores = sensores * 10;
+        if (medicamento == "termossensível") {
+            custobase += 50;
+        }
+        if (status == "Alerta") {
+            custotemperatura = 20;
+        }
+        if (status == "Crítico") {
+            custotemperatura = 50;
+        }
+        custototal = custotemperatura + custosensores + custobase
+        resultado_div.innerHTML = `
+        <p><b>Detalhes do Cálculo:</b></p>
+        <p>Custo Base (R$): ${custobase}</p>
+        <p>Custo de Temperatura (R$): ${custotemperatura}</p>
+        <p>Custo de Sensores (R$): ${custosensores}</p>
+        <p><b>Custo Total de Transporte: R$ ${custototal}</b></p>
+    `;
+    }
+</script>
